@@ -24,7 +24,7 @@ fun SectionContent(
         modifier = modifier.fillMaxWidth()
     ) {
         Text(
-            text = section.name,
+            text = section.name+" (${section.type})",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
