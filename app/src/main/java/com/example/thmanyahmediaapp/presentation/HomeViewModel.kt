@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     }
 
 //    fun search(query: String, page: Int = 1, limit: Int = 20) {
-//        viewModelScope.launch {
+//        request {
 //            toggleLoading.value = true
 //
 //            mediaRepository.search(query, page, limit)

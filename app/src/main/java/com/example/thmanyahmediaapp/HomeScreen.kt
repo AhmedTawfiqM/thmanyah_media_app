@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.thmanyahmediaapp.presentation.HomeViewModel
+import com.example.thmanyahmediaapp.ui.components.SectionContent
 
 class HomeScreen(
     override val vm: HomeViewModel,
@@ -24,16 +25,16 @@ class HomeScreen(
         var searchQuery by remember { mutableStateOf("") }
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
             // Search Section
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 label = { Text("Search") },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 trailingIcon = {
                     Button(
                         onClick = {
@@ -47,24 +48,24 @@ class HomeScreen(
                 }
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
             // Search Results or Home Sections
             if (searchResults != null) {
                 // Show Search Results
                 Text(
                     text = "Search Results (${searchResults!!.totalCount})",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
-                Spacer(modifier = Modifier.height(8.dp))
 
-                LazyColumn {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     items(searchResults!!.results) { result ->
                         Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp),
+                            modifier = Modifier.fillMaxWidth(),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                         ) {
                             Column(
@@ -99,54 +100,44 @@ class HomeScreen(
                         vm.clearSearch()
                         searchQuery = ""
                     },
-                    modifier = Modifier.padding(top = 16.dp)
+                    modifier = Modifier.padding(16.dp)
                 ) {
                     Text("Clear Search")
                 }
 
             } else {
-                // Show Home Sections
-                Text(
-                    text = "Home Sections",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+                // Show Home Sections with dynamic layouts
+                if (homeSections != null) {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(24.dp)
+                    ) {
+                        items(
+                            items = homeSections!!.sections.sortedBy { it.order },
+                            key = { section -> section.order }
+                        ) { section ->
+                            SectionContent(
+                                section = section,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
 
-                if (homeSections != null)
-                    LazyColumn {
-                        items(homeSections!!.sections) { section ->
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp),
-                                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                            ) {
-                                Column(
-                                    modifier = Modifier.padding(16.dp)
-                                ) {
-                                    Text(
-                                        text = section.name,
-                                        style = MaterialTheme.typography.titleLarge,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Text(
-                                        text = "Type: ${section.type}",
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        modifier = Modifier.padding(top = 4.dp)
-                                    )
-                                    section.content.let { items ->
-                                        Text(
-                                            text = "${items.size} items",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            modifier = Modifier.padding(top = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
+                        // Add bottom padding
+                        item {
+                            Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
+                } else {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Loading sections...",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
             }
         }
     }
