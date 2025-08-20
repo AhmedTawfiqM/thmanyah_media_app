@@ -17,10 +17,10 @@ open class AppViewModel : ViewModel() {
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                errorMessage.value = null
                 operation()
             } catch (ex: Exception) {
                 handleError(ex)
+                ex.printStackTrace()
             }
         }
     }

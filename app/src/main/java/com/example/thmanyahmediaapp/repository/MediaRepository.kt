@@ -21,7 +21,7 @@ class MediaRepository @Inject constructor(
         return response.body()?.let { body ->
             // Parse content for each section and return typed sections
             val parsedSections = body.sections.map { section ->
-                section.copy(content = ContentParser.parseContentForSection(section.content, section.contentType))
+                section.copy(items = ContentParser.parseContentForSection(section.items, section.contentType))
             }
             ApiResponse.Success(body.copy(sections = parsedSections))
         } ?: ApiResponse.Error("Empty response body")

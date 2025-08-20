@@ -1,15 +1,13 @@
-package com.example.thmanyahmediaapp.presentation
+package com.example.thmanyahmediaapp.screen
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.example.thmanyahmediaapp.AppViewModel
-import com.example.thmanyahmediaapp.network.ApiResponse
-import com.example.thmanyahmediaapp.network.model.*
+import com.example.thmanyahmediaapp.network.model.SearchResponse
+import com.example.thmanyahmediaapp.network.model.SectionsResponse
 import com.example.thmanyahmediaapp.network.onError
 import com.example.thmanyahmediaapp.network.onSuccess
 import com.example.thmanyahmediaapp.repository.MediaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -35,7 +33,7 @@ class HomeViewModel @Inject constructor(
                     homeSections.value = response
                 }
                 .onError { message, code ->
-                    Timber.e("Failed to load home sections: $message (code: $code)")
+                    Timber.Forest.e("Failed to load home sections: $message (code: $code)")
                 }
 
             toggleLoading.value = false

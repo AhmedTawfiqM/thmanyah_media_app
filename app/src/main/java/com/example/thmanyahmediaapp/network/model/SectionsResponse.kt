@@ -5,13 +5,10 @@ import com.google.gson.annotations.SerializedName
 enum class SectionType {
     @SerializedName("square")
     SQUARE,
-
     @SerializedName("2_lines_grid")
     TWO_LINES_GRID,
-
     @SerializedName("big_square")
     BIG_SQUARE,
-
     @SerializedName("queue")
     QUEUE
 }
@@ -19,13 +16,10 @@ enum class SectionType {
 enum class ContentType {
     @SerializedName("podcast")
     PODCAST,
-
     @SerializedName("episode")
     EPISODE,
-
     @SerializedName("audio_book")
     AUDIO_BOOK,
-
     @SerializedName("audio_article")
     AUDIO_ARTICLE
 }
@@ -45,13 +39,13 @@ data class Section(
     @SerializedName("name")
     val name: String,
     @SerializedName("type")
-    val type: SectionType,
+    val type: SectionType?,
     @SerializedName("content_type")
     val contentType: ContentType,
     @SerializedName("order")
     val order: Int,
     @SerializedName("content")
-    val content: List<Any> // Will contain different content types based on content_type
+    val items: List<Any>
 )
 
 data class Pagination(
@@ -61,7 +55,6 @@ data class Pagination(
     val totalPages: Int? = null
 )
 
-// Podcast content model
 data class Podcast(
     @SerializedName("podcast_id")
     val podcastId: String,
@@ -85,7 +78,6 @@ data class Podcast(
     val score: Double? = null
 )
 
-// Episode content model
 data class Episode(
     @SerializedName("podcastPopularityScore")
     val podcastPopularityScore: Int? = null,
@@ -145,7 +137,6 @@ data class Episode(
     val score: Double? = null
 )
 
-// Audiobook content model
 data class AudioBook(
     @SerializedName("audiobook_id")
     val audiobookId: String,
@@ -167,7 +158,6 @@ data class AudioBook(
     val score: Double? = null
 )
 
-// Audio article content model
 data class AudioArticle(
     @SerializedName("article_id")
     val articleId: String,
