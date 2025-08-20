@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.section
+package com.example.thmanyahmediaapp.presentation.screen.home.section
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.thmanyahmediaapp.domain.model.ContentType
-import com.example.thmanyahmediaapp.presentation.screen.ContentCard
+import com.example.thmanyahmediaapp.presentation.screen.home.ContentCard
 
 @Composable
  fun SquareGrid(

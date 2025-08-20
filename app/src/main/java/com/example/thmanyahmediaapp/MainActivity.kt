@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.thmanyahmediaapp.presentation.base.ScreenRoute
-import com.example.thmanyahmediaapp.presentation.screen.HomeScreen
+import com.example.thmanyahmediaapp.presentation.screen.home.HomeScreen
 import com.example.thmanyahmediaapp.presentation.theme.ThmanyahMediaAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.content
+package com.example.thmanyahmediaapp.presentation.screen.home.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,18 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.AudioBook
+import com.example.thmanyahmediaapp.domain.model.Podcast
 
 @Composable
-fun AudioBookCard(audioBook: AudioBook) {
+ fun PodcastCard(podcast: Podcast) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ) {
         AsyncImage(
-            model = audioBook.avatarUrl,
-            contentDescription = audioBook.name,
+            model = podcast.avatarUrl,
+            contentDescription = podcast.name,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -39,26 +39,18 @@ fun AudioBookCard(audioBook: AudioBook) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = audioBook.name,
+            text = podcast.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
-        audioBook.authorName?.let { author ->
+        podcast.episodeCount?.let { count ->
             Text(
-                text = "By $author",
+                text = "$count episodes",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-
-        audioBook.duration?.let { duration ->
-            Text(
-                text = "${duration / 3600}h ${(duration % 3600) / 60}m",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary
             )
         }
     }

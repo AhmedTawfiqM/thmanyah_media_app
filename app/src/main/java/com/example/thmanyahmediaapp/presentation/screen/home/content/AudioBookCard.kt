@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.content
+package com.example.thmanyahmediaapp.presentation.screen.home.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,18 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.Podcast
+import com.example.thmanyahmediaapp.domain.model.AudioBook
 
 @Composable
- fun PodcastCard(podcast: Podcast) {
+fun AudioBookCard(audioBook: AudioBook) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ) {
         AsyncImage(
-            model = podcast.avatarUrl,
-            contentDescription = podcast.name,
+            model = audioBook.avatarUrl,
+            contentDescription = audioBook.name,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -39,18 +39,26 @@ import com.example.thmanyahmediaapp.domain.model.Podcast
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = podcast.name,
+            text = audioBook.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
-        podcast.episodeCount?.let { count ->
+        audioBook.authorName?.let { author ->
             Text(
-                text = "$count episodes",
+                text = "By $author",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        audioBook.duration?.let { duration ->
+            Text(
+                text = "${duration / 3600}h ${(duration % 3600) / 60}m",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

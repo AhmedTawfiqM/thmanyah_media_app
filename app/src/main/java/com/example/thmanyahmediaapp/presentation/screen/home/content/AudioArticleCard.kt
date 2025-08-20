@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.content
+package com.example.thmanyahmediaapp.presentation.screen.home.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

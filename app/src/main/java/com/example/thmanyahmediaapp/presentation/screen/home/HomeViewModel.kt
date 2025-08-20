@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen
+package com.example.thmanyahmediaapp.presentation.screen.home
 
 import androidx.compose.runtime.mutableStateOf
 import com.example.thmanyahmediaapp.data.network.ApiResponse
@@ -7,6 +7,7 @@ import com.example.thmanyahmediaapp.domain.model.SearchResponse
 import com.example.thmanyahmediaapp.data.repository.MediaRepository
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,6 +32,7 @@ class HomeViewModel @Inject constructor(
         request {
             _homeSections.value = ApiResponse.Loading
             val result = mediaRepository.getHomeSections()
+            delay(1000)
             _homeSections.value = result
         }
     }
