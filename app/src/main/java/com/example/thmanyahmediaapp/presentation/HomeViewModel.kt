@@ -3,7 +3,10 @@ package com.example.thmanyahmediaapp.presentation
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.thmanyahmediaapp.AppViewModel
+import com.example.thmanyahmediaapp.network.ApiResponse
 import com.example.thmanyahmediaapp.network.model.*
+import com.example.thmanyahmediaapp.network.onError
+import com.example.thmanyahmediaapp.network.onSuccess
 import com.example.thmanyahmediaapp.repository.MediaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,36 +30,34 @@ class HomeViewModel @Inject constructor(
         request {
             toggleLoading.value = true
 
-            mediaRepository.getHomeSections().fold(
-                onSuccess = { response ->
+            mediaRepository.getHomeSections()
+                .onSuccess { response ->
                     homeSections.value = response
-                },
-                onFailure = { error ->
-                    Timber.e(error, "Failed to load home sections")
                 }
-            )
+                .onError { message, code ->
+                    Timber.e("Failed to load home sections: $message (code: $code)")
+                }
 
             toggleLoading.value = false
         }
     }
 
-    fun search(query: String, page: Int = 1, limit: Int = 20) {
-        viewModelScope.launch {
-            toggleLoading.value = true
-
-            mediaRepository.search(query, page, limit).fold(
-                onSuccess = { response ->
-                    searchResults.value = response
-                    Timber.d("Search completed: ${response.results.size} results for '$query'")
-                },
-                onFailure = { error ->
-                    Timber.e(error, "Search failed for query: $query")
-                }
-            )
-
-            toggleLoading.value = false
-        }
-    }
+//    fun search(query: String, page: Int = 1, limit: Int = 20) {
+//        viewModelScope.launch {
+//            toggleLoading.value = true
+//
+//            mediaRepository.search(query, page, limit)
+//                .onSuccess { response ->
+//                    searchResults.value = response
+//                    Timber.d("Search completed: ${response.results.size} results for '$query'")
+//                }
+//                .onError { message, code ->
+//                    Timber.e("Search failed for query: $query - $message (code: $code)")
+//                }
+//
+//            toggleLoading.value = false
+//        }
+//    }
 
     fun clearSearch() {
         searchResults.value = null

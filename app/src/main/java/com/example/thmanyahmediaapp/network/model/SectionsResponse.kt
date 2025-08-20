@@ -2,7 +2,6 @@ package com.example.thmanyahmediaapp.network.model
 
 import com.google.gson.annotations.SerializedName
 
-// Enum for section layout types
 enum class SectionType {
     @SerializedName("square")
     SQUARE,
@@ -17,7 +16,6 @@ enum class SectionType {
     QUEUE
 }
 
-// Enum for content types
 enum class ContentType {
     @SerializedName("podcast")
     PODCAST,

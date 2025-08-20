@@ -1,7 +1,9 @@
 package com.example.thmanyahmediaapp.repository
 
+import com.example.thmanyahmediaapp.network.ApiResponse
 import com.example.thmanyahmediaapp.network.HomeApiService
 import com.example.thmanyahmediaapp.network.SearchApiService
+import com.example.thmanyahmediaapp.network.model.SectionsResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,26 +13,17 @@ class MediaRepository @Inject constructor(
     private val searchApi: SearchApiService
 ) {
 
-    suspend fun getHomeSections() = try {
+    suspend fun getHomeSections(): ApiResponse<SectionsResponse> {
         val response = homeApi.getHomeSections()
-        if (response.isSuccessful) {
-            Result.success(response.body()!!)
-        } else {
-            Result.failure(Exception("Failed to get home sections: ${response.code()}"))
-        }
-    } catch (e: Exception) {
-        Result.failure(e)
+        return response.body()?.let { body ->
+            ApiResponse.Success(body)
+        } ?: ApiResponse.Error("Empty response body")
     }
 
-    // Search API methods
-    suspend fun search(query: String, page: Int = 1, limit: Int = 20) = try {
+    suspend fun search(query: String, page: Int = 1, limit: Int = 20): ApiResponse<*> {
         val response = searchApi.search(query, page, limit)
-        if (response.isSuccessful) {
-            Result.success(response.body()!!)
-        } else {
-            Result.failure(Exception("Failed to search: ${response.code()}"))
-        }
-    } catch (e: Exception) {
-        Result.failure(e)
+        return response.body()?.let { body ->
+            ApiResponse.Success(body)
+        } ?: ApiResponse.Error("Empty response body")
     }
 }

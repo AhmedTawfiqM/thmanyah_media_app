@@ -38,7 +38,7 @@ class HomeScreen(
                     Button(
                         onClick = {
                             if (searchQuery.isNotBlank()) {
-                                vm.search(searchQuery)
+                                //vm.search(searchQuery)
                             }
                         }
                     ) {
