@@ -14,8 +14,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.thmanyahmediaapp.screen.HomeScreen
-import com.example.thmanyahmediaapp.ui.theme.ThmanyahMediaAppTheme
+import com.example.thmanyahmediaapp.presentation.base.ScreenRoute
+import com.example.thmanyahmediaapp.presentation.screen.HomeScreen
+import com.example.thmanyahmediaapp.presentation.theme.ThmanyahMediaAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
