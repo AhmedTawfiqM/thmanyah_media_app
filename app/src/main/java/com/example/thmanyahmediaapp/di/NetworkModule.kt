@@ -1,5 +1,6 @@
 package com.example.thmanyahmediaapp.di
 
+import com.example.thmanyahmediaapp.data.network.BaseUrl
 import com.example.thmanyahmediaapp.data.network.HomeApiService
 import com.example.thmanyahmediaapp.data.network.SearchApiService
 import com.google.gson.Gson
@@ -23,8 +24,6 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-        private const val HOME_BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/"
-        private const val SEARCH_BASE_URL = "https://mock.apidog.com/m1/735111-711675-default/"
         private const val TIMEOUT_SECONDS = 30L
     }
 
@@ -79,7 +78,7 @@ class NetworkModule {
         gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(HOME_BASE_URL)
+            .baseUrl(BaseUrl.HOME_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -93,7 +92,7 @@ class NetworkModule {
         gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(SEARCH_BASE_URL)
+            .baseUrl(BaseUrl.SEARCH_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

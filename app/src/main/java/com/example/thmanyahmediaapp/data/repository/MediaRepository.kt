@@ -31,6 +31,4 @@ class MediaRepository @Inject constructor(
             ApiResponse.Success(body)
         } ?: ApiResponse.Error("Empty response body")
     }
-
-
 }

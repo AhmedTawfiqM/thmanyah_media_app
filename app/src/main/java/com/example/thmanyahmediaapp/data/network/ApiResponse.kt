@@ -10,14 +10,12 @@ sealed class ApiResponse<out T> {
     object Loading : ApiResponse<Nothing>()
 }
 
-// Data class for generic error response
 data class ErrorResponse(
     val status: String? = null,
     val message: String? = null,
     val error: String? = null
 )
 
-// Utility function to extract error message from Response
 fun <T> Response<T>.getErrorMessage(): String {
     return try {
         val errorBody = this.errorBody()?.string()

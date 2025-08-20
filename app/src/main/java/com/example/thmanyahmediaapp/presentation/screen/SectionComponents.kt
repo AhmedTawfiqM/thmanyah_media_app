@@ -43,7 +43,11 @@ fun SectionContent(
         when (section.type) {
             SectionType.SQUARE -> SquareGrid(parsedContent, section.contentType)
             SectionType.TWO_LINES_GRID -> TwoLinesGrid(parsedContent, section.contentType)
-            SectionType.BIG_SQUARE -> BigSquareLayout(parsedContent, section.contentType)
+            SectionType.BIG_SQUARE, SectionType.BIGSQUARE -> BigSquareLayout(
+                parsedContent,
+                section.contentType
+            )
+
             SectionType.QUEUE -> QueueLayout(parsedContent, section.contentType)
             null -> {}
         }

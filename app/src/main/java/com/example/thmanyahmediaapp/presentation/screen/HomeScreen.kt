@@ -79,7 +79,6 @@ class HomeScreen(
                             )
                         }
 
-                        // Add bottom padding
                         item {
                             Spacer(modifier = Modifier.height(16.dp))
                         }

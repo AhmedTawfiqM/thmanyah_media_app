@@ -5,10 +5,17 @@ import com.google.gson.annotations.SerializedName
 enum class SectionType {
     @SerializedName("square")
     SQUARE,
+
     @SerializedName("2_lines_grid")
     TWO_LINES_GRID,
+
     @SerializedName("big_square")
     BIG_SQUARE,
+
+    /** this type is a Workaround to handle issue from Api response */
+    @SerializedName("big square")
+    BIGSQUARE,
+
     @SerializedName("queue")
     QUEUE
 }
@@ -16,10 +23,13 @@ enum class SectionType {
 enum class ContentType {
     @SerializedName("podcast")
     PODCAST,
+
     @SerializedName("episode")
     EPISODE,
+
     @SerializedName("audio_book")
     AUDIO_BOOK,
+
     @SerializedName("audio_article")
     AUDIO_ARTICLE
 }
