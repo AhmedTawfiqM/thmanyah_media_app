@@ -28,8 +28,8 @@ class MediaRepository @Inject constructor(
         } ?: ApiResult.Error("Empty response body")
     }
 
-    override suspend fun search(query: String, page: Int, limit: Int): ApiResult<*> {
-        val response = searchApi.search(query, page, limit)
+    override suspend fun search(query: String): ApiResult<SectionsResponse> {
+        val response = searchApi.search(query=query)
         return response.body()?.let { body ->
             ApiResult.Success(body)
         } ?: ApiResult.Error("Empty response body")

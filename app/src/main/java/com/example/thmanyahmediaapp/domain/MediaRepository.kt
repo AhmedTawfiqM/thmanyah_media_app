@@ -9,5 +9,5 @@ interface IMediaRepository {
         limit: Int,
     ): ApiResult<SectionsResponse>
 
-    suspend fun search(query: String, page: Int = 1, limit: Int = 20): ApiResult<*>
+    suspend fun search(query: String): ApiResult<SectionsResponse>
 }

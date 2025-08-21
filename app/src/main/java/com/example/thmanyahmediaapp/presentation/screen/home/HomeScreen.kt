@@ -34,8 +34,6 @@ class HomeScreen(
 
     @Composable
     override fun Content() {
-        val searchResults by vm.searchResults
-        var searchQuery by remember { mutableStateOf("") }
         val sections = vm.sectionsFlow.collectAsLazyPagingItems()
 
         when {
