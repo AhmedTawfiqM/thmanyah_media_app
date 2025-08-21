@@ -21,6 +21,9 @@ moshi = "1.15.1"
 gson = "2.10.1"
 coil = "2.7.0"
 pagingRuntimeKtx = "3.3.6"
+mockk = "1.13.8"
+kotlinx-coroutines-test = "1.7.3"
+androidx-arch-core-testing = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -72,6 +75,11 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 #for paging
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntimeKtx" }
+
+# Test dependencies
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-core-testing" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
