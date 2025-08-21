@@ -1,9 +1,10 @@
 package com.example.thmanyahmediaapp.data.repository
 
+import com.example.thmanyahmediaapp.data.SearchSectionParser
 import com.example.thmanyahmediaapp.data.SectionParser
+import com.example.thmanyahmediaapp.data.model.SearchSectionsResponse
 import com.example.thmanyahmediaapp.domain.IMediaRepository
 import com.example.thmanyahmediaapp.data.model.SectionsResponse
-import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.network.HomeApiService
 import com.example.thmanyahmediaapp.data.network.SearchApiService
@@ -32,7 +33,10 @@ class MediaRepository @Inject constructor(
     override suspend fun search(query: String): ApiResult<SearchSectionsResponse> {
         val response = searchApi.search(query = query)
         return response.body()?.let { body ->
-            ApiResult.Success(body)
+            val parsedSections = body.sections.map { section ->
+                section.copy(items = SearchSectionParser.parse(section.items, section.sectionContentType))
+            }
+            ApiResult.Success(body.copy(sections = parsedSections))
         } ?: ApiResult.Error("Empty response body")
     }
 }

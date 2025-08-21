@@ -17,10 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.entity.sections.AudioBook
+import com.example.thmanyahmediaapp.presentation.model.section_item.AudioBookItem
 
 @Composable
-fun AudioBookCard(audioBook: AudioBook) {
+fun AudioBookCard(audioBook: AudioBookItem) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,8 +55,10 @@ fun AudioBookCard(audioBook: AudioBook) {
         }
 
         audioBook.duration?.let { duration ->
+            val durationInt = duration.toIntOrNull() ?: 0
+            //TODO: check if castable to int then computre
             Text(
-                text = "${duration / 3600}h ${(duration % 3600) / 60}m",
+                text = "${durationInt / 3600}h ${(durationInt % 3600) / 60}m",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary
             )

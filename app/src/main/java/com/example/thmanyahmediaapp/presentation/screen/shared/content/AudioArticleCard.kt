@@ -17,10 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.entity.sections.AudioArticle
+import com.example.thmanyahmediaapp.presentation.model.section_item.AudioArticleItem
 
 @Composable
-fun AudioArticleCard(audioArticle: AudioArticle) {
+fun AudioArticleCard(audioArticle: AudioArticleItem) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,8 +55,9 @@ fun AudioArticleCard(audioArticle: AudioArticle) {
         }
 
         audioArticle.duration?.let { duration ->
+            val durationInt = duration.toIntOrNull() ?: 0
             Text(
-                text = "${duration / 60} min",
+                text = "${durationInt / 60} min",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary
             )

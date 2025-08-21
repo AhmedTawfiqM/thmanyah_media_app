@@ -1,6 +1,6 @@
 package com.example.thmanyahmediaapp.presentation.model.mappers
 
-import com.example.thmanyahmediaapp.data.model.Section
+import com.example.thmanyahmediaapp.domain.entity.SectionContentType
 import com.example.thmanyahmediaapp.domain.entity.sections.*
 import com.example.thmanyahmediaapp.domain.entity.search_sections.*
 import com.example.thmanyahmediaapp.presentation.model.section_item.AudioArticleItem
@@ -16,7 +16,7 @@ fun Section.toSectionItem(): SectionItem {
         type = type,
         sectionContentType = sectionContentType,
         order = order,
-        items = items
+        items = items.mapSections(sectionContentType)
     )
 }
 
@@ -26,11 +26,44 @@ fun SearchSection.toSectionItem(): SectionItem {
         type = type,
         sectionContentType = sectionContentType,
         order = order.toIntOrNull() ?: 0,
-        items = items
+        items = items.mapSections(sectionContentType)
     )
 }
 
-// Map Podcast models to UI items
+private fun List<Any>.mapSections(contentType: SectionContentType?): List<Any> {
+    return  mapNotNull { item ->
+        when (contentType) {
+            SectionContentType.PODCAST -> {
+                when (item) {
+                    is Podcast -> item.toPodcastItem()
+                    is SearchPodcast -> item.toPodcastItem()
+                    else -> null
+                }
+            }
+            SectionContentType.EPISODE -> when (item) {
+                is Episode -> item.toEpisodeItem()
+                is SearchEpisode -> item.toEpisodeItem()
+                else -> null
+            }
+            SectionContentType.AUDIO_BOOK ->  when (item) {
+                is AudioBook -> item.toAudioBookItem()
+                is SearchAudioBook -> item.toAudioBookItem()
+                else -> null
+            }
+            SectionContentType.AUDIO_ARTICLE -> when (item) {
+                is AudioArticle -> item.toAudioArticleItem()
+                is SearchAudioArticle -> item.toAudioArticleItem()
+                else -> null
+            }
+            null ->  when (item) {
+                is Podcast -> item.toPodcastItem()
+                is SearchPodcast -> item.toPodcastItem()
+                else -> null
+            }
+        }
+    }
+}
+
 fun Podcast.toPodcastItem(): PodcastItem {
     return PodcastItem(
         podcastId = podcastId,

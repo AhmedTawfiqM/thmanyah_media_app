@@ -10,7 +10,7 @@ data class SearchSection(
     @SerializedName("type")
     val type: SectionLayout?,
     @SerializedName("content_type")
-    val sectionContentType: SectionContentType,
+    val sectionContentType: SectionContentType?,
     @SerializedName("order")
     val order: String,
     @SerializedName("content")

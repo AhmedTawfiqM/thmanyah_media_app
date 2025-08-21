@@ -17,10 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.entity.sections.Episode
+import com.example.thmanyahmediaapp.presentation.model.section_item.EpisodeItem
 
 @Composable
- fun EpisodeCard(episode: Episode) {
+fun EpisodeCard(episode: EpisodeItem) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,8 +55,9 @@ import com.example.thmanyahmediaapp.domain.entity.sections.Episode
         }
 
         episode.duration?.let { duration ->
+            val durationInt = duration.toIntOrNull() ?: 0
             Text(
-                text = "${duration / 60} min",
+                text = "${durationInt / 60} min",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary
             )

@@ -9,14 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.entity.sections.AudioArticle
-import com.example.thmanyahmediaapp.domain.entity.sections.AudioBook
 import com.example.thmanyahmediaapp.domain.entity.SectionContentType
 import com.example.thmanyahmediaapp.domain.entity.SectionLayout
-import com.example.thmanyahmediaapp.domain.entity.sections.Episode
-import com.example.thmanyahmediaapp.domain.entity.sections.Podcast
-import com.example.thmanyahmediaapp.domain.entity.sections.Section
 import com.example.thmanyahmediaapp.presentation.model.section_item.SectionItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.PodcastItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.EpisodeItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.AudioBookItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.AudioArticleItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioArticleCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioBookCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.EpisodeCard
@@ -51,7 +50,7 @@ fun SectionContent(
             SectionLayout.BIG_SQUARE,
             SectionLayout.BIGSQUARE -> BigSquareLayout(items, sectionType)
             SectionLayout.QUEUE -> QueueLayout(items, sectionType)
-            null -> {}
+            null -> QueueLayout(items, sectionType)
         }
     }
 }
@@ -68,11 +67,11 @@ fun SectionContentCard(
         shape = RoundedCornerShape(12.dp)
     ) {
         when (sectionContentType) {
-            SectionContentType.PODCAST -> PodcastCard(content as? Podcast ?: return@Card)
-            SectionContentType.EPISODE -> EpisodeCard(content as? Episode ?: return@Card)
-            SectionContentType.AUDIO_BOOK -> AudioBookCard(content as? AudioBook ?: return@Card)
-            SectionContentType.AUDIO_ARTICLE -> AudioArticleCard(content as? AudioArticle ?: return@Card)
-            null -> PodcastCard(content as? Podcast ?: return@Card)
+            SectionContentType.PODCAST -> PodcastCard(content as? PodcastItem ?: return@Card)
+            SectionContentType.EPISODE -> EpisodeCard(content as? EpisodeItem ?: return@Card)
+            SectionContentType.AUDIO_BOOK -> AudioBookCard(content as? AudioBookItem ?: return@Card)
+            SectionContentType.AUDIO_ARTICLE -> AudioArticleCard(content as? AudioArticleItem ?: return@Card)
+            null -> PodcastCard(content as? PodcastItem ?: return@Card)
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.example.thmanyahmediaapp.presentation.screen.search
 
 import androidx.lifecycle.viewModelScope
+import com.example.thmanyahmediaapp.data.model.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.repository.MediaRepository
-import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview

@@ -17,10 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.entity.sections.Podcast
+import com.example.thmanyahmediaapp.presentation.model.section_item.PodcastItem
 
 @Composable
- fun PodcastCard(podcast: Podcast) {
+fun PodcastCard(podcast: PodcastItem) {
     Column(
         modifier = Modifier
             .fillMaxSize()
