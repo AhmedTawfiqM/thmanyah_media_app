@@ -29,9 +29,7 @@ class MediaPagingSource @Inject constructor(
             val sections = sectionsResponse.sections
             val pagination = sectionsResponse.pagination
 
-            // Determine if there's a next page based on pagination info
-            val hasNextPage = pagination?.nextPage != null ||
-                    (pagination?.totalPages != null && page < pagination.totalPages)
+            val hasNextPage = pagination?.totalPages != null && page < pagination.totalPages
 
             LoadResult.Page(
                 data = sections,
