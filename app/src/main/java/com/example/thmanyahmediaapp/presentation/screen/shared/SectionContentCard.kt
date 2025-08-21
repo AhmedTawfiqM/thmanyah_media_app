@@ -66,7 +66,10 @@ fun SectionContentCard(
     Card(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         when (sectionContentType) {
             SectionContentType.PODCAST -> PodcastCard(content as? PodcastItem ?: return@Card)

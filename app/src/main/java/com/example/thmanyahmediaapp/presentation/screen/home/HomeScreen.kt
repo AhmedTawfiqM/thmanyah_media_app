@@ -1,17 +1,22 @@
 package com.example.thmanyahmediaapp.presentation.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -20,6 +25,9 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.thmanyahmediaapp.domain.entity.sections.Section
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
+import com.example.thmanyahmediaapp.presentation.base.ScreenRoute
+import com.example.thmanyahmediaapp.presentation.component.ErrorView
+import com.example.thmanyahmediaapp.presentation.component.CircularProgressIndicatorView
 import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
@@ -32,26 +40,50 @@ class HomeScreen(
     override fun Content() {
         val sections = vm.sectionsFlow.collectAsLazyPagingItems()
 
-        when {
-            sections.itemCount == 0 && sections.loadState.refresh is LoadState.Loading -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
+        Column {
+            TopBar()
+            when {
+                sections.itemCount == 0 && sections.loadState.refresh is LoadState.Loading -> {
+                    CircularProgressIndicatorView()
+                }
+
+                sections.itemCount == 0 &&
+                        sections.loadState.refresh is LoadState.Error -> {
+                    Text(
+                        text = "Error",
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+
+                else -> SectionsView(sections)
+            }
+        }
+
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun TopBar() {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "Home",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+            },
+            actions = {
+                IconButton(
+                    onClick = {
+                        navigate(ScreenRoute.Search)
+                    }
                 ) {
-                    CircularProgressIndicator()
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
                 }
             }
-
-            sections.itemCount == 0 &&
-                    sections.loadState.refresh is LoadState.Error -> {
-                Text(
-                    text = "Error",
-                    modifier = Modifier.padding(16.dp)
-                )
-            }
-
-            else -> SectionsView(sections)
-        }
+        )
     }
 
     @Composable
@@ -77,30 +109,13 @@ class HomeScreen(
                 when {
                     loadState.append is LoadState.Loading -> {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator()
-                            }
+                            CircularProgressIndicatorView()
                         }
                     }
 
                     loadState.append is LoadState.Error -> {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = "Error loading more items",
-                                    color = androidx.compose.ui.graphics.Color.Red
-                                )
-                            }
+                            ErrorView("Error loading more items")
                         }
                     }
                 }

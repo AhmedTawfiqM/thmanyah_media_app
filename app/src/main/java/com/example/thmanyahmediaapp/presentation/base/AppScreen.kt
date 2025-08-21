@@ -19,6 +19,12 @@ abstract class AppScreen<VM : AppViewModel> {
         LaunchErrorHandler()
     }
 
+    fun navigate(route: ScreenRoute) {
+        host.navigate(route.name)
+    }
+
+    fun pop() = host.popBackStack()
+
     @Composable
     private fun LaunchErrorHandler() {
         LaunchedEffect(Unit) {

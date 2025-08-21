@@ -12,11 +12,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,6 +31,8 @@ import androidx.navigation.NavHostController
 import com.example.thmanyahmediaapp.data.model.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
+import com.example.thmanyahmediaapp.presentation.component.ErrorView
+import com.example.thmanyahmediaapp.presentation.component.CircularProgressIndicatorView
 import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
@@ -41,78 +47,85 @@ class SearchSectionsScreen(
         val searchResults by vm.searchFlow.collectAsState()
         val searchQuery by vm.searchQueryFlow.collectAsState()
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { vm.onSearchQueryChanged(it) },
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text("Search...") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search Icon"
-                    )
-                },
-                singleLine = true
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            when (val result = searchResults) {
-                is ApiResult.Error -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(
-                            text = "Error: ${result.message}",
-                            modifier = Modifier.padding(16.dp)
+        Column {
+            TopBar()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = { vm.onSearchQueryChanged(it) },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text("Search...") },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search Icon"
                         )
+                    },
+                    singleLine = true
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                when (val result = searchResults) {
+                    is ApiResult.Error -> ErrorView(result.message)
+                    ApiResult.Loading -> CircularProgressIndicatorView()
+
+                    is ApiResult.Success<SearchSectionsResponse> -> {
+                        SearchResultsView(result.result)
                     }
-                }
 
-                ApiResult.Loading -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
+                    null -> {
+                        if (searchQuery.isBlank()) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Text(
+                                    text = "Enter a search query to find content",
+                                    modifier = Modifier.padding(16.dp)
+                                )
+                            }
+                        } else
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Text(
+                                    text = "No results found for \"$searchQuery\"",
+                                    modifier = Modifier.padding(16.dp)
+                                )
+                            }
                     }
-                }
-
-                is ApiResult.Success<SearchSectionsResponse> -> {
-                    SearchResultsView(result.result)
-                }
-
-                null -> {
-                    if (searchQuery.isBlank()) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.fillMaxSize()
-                        ) {
-                            Text(
-                                text = "Enter a search query to find content",
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        }
-                    } else
-
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.fillMaxSize()
-                        ) {
-                            Text(
-                                text = "No results found for \"$searchQuery\"",
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        }
                 }
             }
         }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun TopBar() {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "Search",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+            },
+            navigationIcon = {
+                IconButton(
+                    onClick = { pop() }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "ArrowBack"
+                    )
+                }
+            }
+        )
     }
 
     @Composable
