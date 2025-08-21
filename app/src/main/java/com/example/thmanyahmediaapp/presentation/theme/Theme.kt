@@ -32,7 +32,7 @@ fun ThmanyahMediaAppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography(),
+        typography = ArabicTypography,
         content = content
     )
 }
