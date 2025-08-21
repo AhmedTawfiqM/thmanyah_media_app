@@ -18,6 +18,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
@@ -32,9 +35,9 @@ import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
 class HomeScreen(
-    override val vm: HomeViewModel,
+    override val vm: BaseHomeViewModel,
     override val host: NavHostController,
-) : AppScreen<HomeViewModel>() {
+) : AppScreen<BaseHomeViewModel>() {
 
     @Composable
     override fun Content() {
@@ -51,7 +54,20 @@ class HomeScreen(
                         sections.loadState.refresh is LoadState.Error -> {
                     Text(
                         text = "Error",
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .testTag("error_message")
+                            .semantics { contentDescription = "Error loading data" }
+                    )
+                }
+
+                sections.itemCount == 0 -> {
+                    Text(
+                        text = "No content available",
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .testTag("empty_state")
+                            .semantics { contentDescription = "No content available" }
                     )
                 }
 
@@ -65,17 +81,24 @@ class HomeScreen(
     @Composable
     fun TopBar() {
         TopAppBar(
+            modifier = Modifier.testTag("home_top_bar"),
             title = {
                 Text(
                     text = "Home",
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier
+                        .testTag("home_top_bar_title")
+                        .semantics { contentDescription = "Home screen title" }
                 )
             },
             actions = {
                 IconButton(
                     onClick = {
                         navigate(ScreenRoute.Search)
-                    }
+                    },
+                    modifier = Modifier
+                        .testTag("home_search_button")
+                        .semantics { contentDescription = "Navigate to search" }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -89,7 +112,9 @@ class HomeScreen(
     @Composable
     fun SectionsView(sections: LazyPagingItems<Section>) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("sections_list"),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             items(
@@ -100,7 +125,12 @@ class HomeScreen(
                 if (section != null) {
                     SectionContent(
                         section = section.toSectionItem(),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("section_item")
+                            .semantics {
+                                contentDescription = "Section: ${section.name}"
+                            }
                     )
                 }
             }

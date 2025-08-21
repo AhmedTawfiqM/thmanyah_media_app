@@ -19,11 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mediaPagingSource: MediaPagingSource,
-) : AppViewModel() {
-
-    private val _sectionsFlow =
-        MutableStateFlow<PagingData<Section>>(PagingData.Companion.empty())
-    val sectionsFlow: StateFlow<PagingData<Section>> = _sectionsFlow.asStateFlow()
+) : BaseHomeViewModel() {
 
 
     init {
