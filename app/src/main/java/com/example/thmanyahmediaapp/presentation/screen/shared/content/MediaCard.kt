@@ -17,18 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.presentation.model.section_item.AudioBookItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.MediaItem
 
 @Composable
-fun AudioBookCard(audioBook: AudioBookItem) {
+fun MediaCard(mediaItem: MediaItem) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ) {
         AsyncImage(
-            model = audioBook.avatarUrl,
-            contentDescription = audioBook.name,
+            model = mediaItem.avatarUrl,
+            contentDescription = mediaItem.name,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -39,28 +39,11 @@ fun AudioBookCard(audioBook: AudioBookItem) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = audioBook.name,
+            text = mediaItem.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-
-        audioBook.authorName?.let { author ->
-            Text(
-                text = "By $author",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-
-        audioBook.duration?.let { duration ->
-            val durationInt = duration.toIntOrNull() ?: 0
-            Text(
-                text = "${durationInt / 3600}h ${(durationInt % 3600) / 60}m",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
     }
 }

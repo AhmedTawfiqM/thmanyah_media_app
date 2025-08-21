@@ -14,3 +14,9 @@ abstract class MediaEntity {
     @SerializedName("avatar_url")
     val avatarUrl: String? = null
 }
+
+/** this is used for fallback media entity type */
+class DefaultMediaEntity(
+    @SerializedName("podcast_id")
+    override val id: String,
+) : MediaEntity()

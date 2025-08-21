@@ -1,5 +1,7 @@
 package com.example.thmanyahmediaapp.data
 
+import com.example.thmanyahmediaapp.domain.entity.DefaultMediaEntity
+import com.example.thmanyahmediaapp.domain.entity.MediaEntity
 import com.example.thmanyahmediaapp.domain.entity.SectionContentType
 import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchAudioArticle
 import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchAudioBook
@@ -45,7 +47,7 @@ object SearchSectionParser {
                         SectionContentType.EPISODE -> gson.fromJson(json, SearchEpisode::class.java)
                         SectionContentType.AUDIO_BOOK -> gson.fromJson(json, SearchAudioBook::class.java)
                         SectionContentType.AUDIO_ARTICLE -> gson.fromJson(json, SearchAudioArticle::class.java)
-                        null -> gson.fromJson(json, SearchPodcast::class.java)
+                        null -> gson.fromJson(json, DefaultMediaEntity::class.java)
                     }
                 }
                 else -> item

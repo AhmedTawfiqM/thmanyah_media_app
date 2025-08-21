@@ -16,9 +16,11 @@ import com.example.thmanyahmediaapp.presentation.model.section_item.PodcastItem
 import com.example.thmanyahmediaapp.presentation.model.section_item.EpisodeItem
 import com.example.thmanyahmediaapp.presentation.model.section_item.AudioBookItem
 import com.example.thmanyahmediaapp.presentation.model.section_item.AudioArticleItem
+import com.example.thmanyahmediaapp.presentation.model.section_item.MediaItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioArticleCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioBookCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.EpisodeCard
+import com.example.thmanyahmediaapp.presentation.screen.shared.content.MediaCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.PodcastCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.section.BigSquareLayout
 import com.example.thmanyahmediaapp.presentation.screen.shared.section.QueueLayout
@@ -71,7 +73,7 @@ fun SectionContentCard(
             SectionContentType.EPISODE -> EpisodeCard(content as? EpisodeItem ?: return@Card)
             SectionContentType.AUDIO_BOOK -> AudioBookCard(content as? AudioBookItem ?: return@Card)
             SectionContentType.AUDIO_ARTICLE -> AudioArticleCard(content as? AudioArticleItem ?: return@Card)
-            null -> PodcastCard(content as? PodcastItem ?: return@Card)
+            null -> MediaCard(content as? MediaItem ?: return@Card)
         }
     }
 }
