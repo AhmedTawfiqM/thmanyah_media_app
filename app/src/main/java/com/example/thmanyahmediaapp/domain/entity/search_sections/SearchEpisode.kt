@@ -1,5 +1,6 @@
 package com.example.thmanyahmediaapp.domain.entity.search_sections
 
+import com.example.thmanyahmediaapp.domain.entity.MediaEntity
 import com.google.gson.annotations.SerializedName
 
 data class SearchEpisode(
@@ -8,9 +9,7 @@ data class SearchEpisode(
     @SerializedName("podcastPriority")
     val podcastPriority: String? = null,
     @SerializedName("episode_id")
-    val episodeId: String,
-    @SerializedName("name")
-    val name: String,
+    override val id: String,
     @SerializedName("season_number")
     val seasonNumber: String? = null,
     @SerializedName("episode_type")
@@ -19,14 +18,10 @@ data class SearchEpisode(
     val podcastName: String? = null,
     @SerializedName("author_name")
     val authorName: String? = null,
-    @SerializedName("description")
-    val description: String? = null,
     @SerializedName("number")
     val number: String? = null,
     @SerializedName("duration")
     val duration: String? = null,
-    @SerializedName("avatar_url")
-    val avatarUrl: String? = null,
     @SerializedName("separated_audio_url")
     val separatedAudioUrl: String? = null,
     @SerializedName("audio_url")
@@ -49,4 +44,4 @@ data class SearchEpisode(
     val freeTranscriptUrl: String? = null,
     @SerializedName("paid_is_exclusive_partially")
     val paidIsExclusivePartially: Boolean? = null
-)
+) : MediaEntity()

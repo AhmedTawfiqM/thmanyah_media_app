@@ -24,7 +24,12 @@ class MediaRepository @Inject constructor(
         val response = homeApi.getHomeSections(page, limit)
         return response.body()?.let { body ->
             val parsedSections = body.sections.map { section ->
-                section.copy(items = SectionParser.parse(section.items, section.sectionContentType))
+                section.copy(
+                    items = SectionParser.parse(
+                        section.items,
+                        section.sectionContentType
+                    )
+                )
             }
             ApiResult.Success(body.copy(sections = parsedSections))
         } ?: ApiResult.Error("Empty response body")
@@ -34,7 +39,12 @@ class MediaRepository @Inject constructor(
         val response = searchApi.search(query = query)
         return response.body()?.let { body ->
             val parsedSections = body.sections.map { section ->
-                section.copy(items = SearchSectionParser.parse(section.items, section.sectionContentType))
+                section.copy(
+                    items = SearchSectionParser.parse(
+                        section.items,
+                        section.sectionContentType
+                    )
+                )
             }
             ApiResult.Success(body.copy(sections = parsedSections))
         } ?: ApiResult.Error("Empty response body")

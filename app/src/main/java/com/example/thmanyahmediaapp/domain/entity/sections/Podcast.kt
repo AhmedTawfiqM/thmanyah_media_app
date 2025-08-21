@@ -1,16 +1,12 @@
 package com.example.thmanyahmediaapp.domain.entity.sections
 
+import com.example.thmanyahmediaapp.domain.entity.MediaEntity
 import com.google.gson.annotations.SerializedName
+
 
 data class Podcast(
     @SerializedName("podcast_id")
-    val podcastId: String,
-    @SerializedName("name")
-    val name: String,
-    @SerializedName("description")
-    val description: String? = null,
-    @SerializedName("avatar_url")
-    val avatarUrl: String? = null,
+    override val id: String,
     @SerializedName("episode_count")
     val episodeCount: Int? = null,
     @SerializedName("duration")
@@ -22,5 +18,5 @@ data class Podcast(
     @SerializedName("popularityScore")
     val popularityScore: Int? = null,
     @SerializedName("score")
-    val score: Double? = null
-)
+    val score: Double? = null,
+) : MediaEntity()

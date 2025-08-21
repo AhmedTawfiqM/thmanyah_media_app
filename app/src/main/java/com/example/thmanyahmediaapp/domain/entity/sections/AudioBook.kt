@@ -1,18 +1,13 @@
 package com.example.thmanyahmediaapp.domain.entity.sections
 
+import com.example.thmanyahmediaapp.domain.entity.MediaEntity
 import com.google.gson.annotations.SerializedName
 
 data class AudioBook(
     @SerializedName("audiobook_id")
-    val audiobookId: String,
-    @SerializedName("name")
-    val name: String,
+    override val id: String,
     @SerializedName("author_name")
     val authorName: String? = null,
-    @SerializedName("description")
-    val description: String? = null,
-    @SerializedName("avatar_url")
-    val avatarUrl: String? = null,
     @SerializedName("duration")
     val duration: Int? = null,
     @SerializedName("language")
@@ -21,4 +16,4 @@ data class AudioBook(
     val releaseDate: String? = null,
     @SerializedName("score")
     val score: Double? = null
-)
+) : MediaEntity()

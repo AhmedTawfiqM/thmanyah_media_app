@@ -66,7 +66,7 @@ private fun List<Any>.mapSections(contentType: SectionContentType?): List<Any> {
 
 fun Podcast.toPodcastItem(): PodcastItem {
     return PodcastItem(
-        podcastId = podcastId,
+        id = id,
         name = name,
         description = description,
         avatarUrl = avatarUrl,
@@ -81,7 +81,7 @@ fun Podcast.toPodcastItem(): PodcastItem {
 
 fun SearchPodcast.toPodcastItem(): PodcastItem {
     return PodcastItem(
-        podcastId = podcastId,
+        id = id,
         name = name,
         description = description,
         avatarUrl = avatarUrl,
@@ -99,7 +99,7 @@ fun Episode.toEpisodeItem(): EpisodeItem {
     return EpisodeItem(
         podcastPopularityScore = podcastPopularityScore?.toString(),
         podcastPriority = podcastPriority?.toString(),
-        episodeId = episodeId,
+        id = id,
         name = name,
         seasonNumber = seasonNumber?.toString(),
         episodeType = episodeType,
@@ -127,7 +127,7 @@ fun SearchEpisode.toEpisodeItem(): EpisodeItem {
     return EpisodeItem(
         podcastPopularityScore = podcastPopularityScore,
         podcastPriority = podcastPriority,
-        episodeId = episodeId,
+        id = id,
         name = name,
         seasonNumber = seasonNumber,
         episodeType = episodeType,
@@ -153,7 +153,7 @@ fun SearchEpisode.toEpisodeItem(): EpisodeItem {
 
 fun AudioBook.toAudioBookItem(): AudioBookItem {
     return AudioBookItem(
-        audiobookId = audiobookId,
+        id = id,
         name = name,
         authorName = authorName,
         description = description,
@@ -167,7 +167,7 @@ fun AudioBook.toAudioBookItem(): AudioBookItem {
 
 fun SearchAudioBook.toAudioBookItem(): AudioBookItem {
     return AudioBookItem(
-        audiobookId = audiobookId,
+        id = id,
         name = name,
         authorName = authorName,
         description = description,
@@ -181,7 +181,7 @@ fun SearchAudioBook.toAudioBookItem(): AudioBookItem {
 
 fun AudioArticle.toAudioArticleItem(): AudioArticleItem {
     return AudioArticleItem(
-        articleId = articleId,
+        id = id,
         name = name,
         authorName = authorName,
         description = description,
@@ -194,7 +194,7 @@ fun AudioArticle.toAudioArticleItem(): AudioArticleItem {
 
 fun SearchAudioArticle.toAudioArticleItem(): AudioArticleItem {
     return AudioArticleItem(
-        articleId = articleId,
+        id = id,
         name = name,
         authorName = authorName,
         description = description,
