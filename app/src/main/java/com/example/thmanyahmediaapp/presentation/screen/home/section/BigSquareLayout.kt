@@ -8,13 +8,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.model.ContentType
+import com.example.thmanyahmediaapp.domain.model.SectionContentType
 import com.example.thmanyahmediaapp.presentation.screen.home.ContentCard
 
 @Composable
  fun BigSquareLayout(
     content: List<Any>,
-    contentType: ContentType
+    sectionContentType: SectionContentType
 ) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
@@ -23,7 +23,7 @@ import com.example.thmanyahmediaapp.presentation.screen.home.ContentCard
         items(content) { item ->
             ContentCard(
                 content = item,
-                contentType = contentType,
+                sectionContentType = sectionContentType,
                 modifier = Modifier
                     .fillParentMaxWidth(0.8f)
                     .aspectRatio(1f)

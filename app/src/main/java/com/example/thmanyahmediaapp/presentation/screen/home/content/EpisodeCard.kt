@@ -42,7 +42,7 @@ import com.example.thmanyahmediaapp.domain.model.Episode
             text = episode.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
 

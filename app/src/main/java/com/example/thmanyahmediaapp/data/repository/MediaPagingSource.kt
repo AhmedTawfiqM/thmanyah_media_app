@@ -1,6 +1,6 @@
 package com.example.thmanyahmediaapp.data.repository
 
-import com.example.thmanyahmediaapp.data.network.ApiResponse
+import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.domain.model.Section
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.paging.BasePagingSource
@@ -25,7 +25,7 @@ class MediaPagingSource @Inject constructor(
         delay(1500)
 
         return if (response.isSuccess) {
-            val successResponse = response as ApiResponse.Success<SectionsResponse>
+            val successResponse = response as ApiResult.Success<SectionsResponse>
             val sectionsResponse = successResponse.result
             val sections = sectionsResponse.sections
             val pagination = sectionsResponse.pagination

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.thmanyahmediaapp.domain.model.Section
-import com.example.thmanyahmediaapp.domain.model.SectionType
+import com.example.thmanyahmediaapp.domain.model.SectionLayout
 
 @Composable
 fun SectionContent(
@@ -18,24 +18,24 @@ fun SectionContent(
     modifier: Modifier = Modifier
 ) {
     val items = section.items
-    val sectionType = section.contentType
+    val sectionType = section.sectionContentType
 
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
         Text(
-            text = section.name+" (${section.type})",
+            text = section.name,
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
 
         when (section.type) {
-            SectionType.SQUARE -> SquareGrid(items, sectionType)
-            SectionType.TWO_LINES_GRID -> TwoLinesGrid(items, sectionType)
-            SectionType.BIG_SQUARE,
-            SectionType.BIGSQUARE -> BigSquareLayout(items, sectionType)
-            SectionType.QUEUE -> QueueLayout(items, sectionType)
+            SectionLayout.SQUARE -> SquareGrid(items, sectionType)
+            SectionLayout.TWO_LINES_GRID -> TwoLinesGrid(items, sectionType)
+            SectionLayout.BIG_SQUARE,
+            SectionLayout.BIGSQUARE -> BigSquareLayout(items, sectionType)
+            SectionLayout.QUEUE -> QueueLayout(items, sectionType)
             null -> {}
         }
     }

@@ -3,7 +3,7 @@ package com.example.thmanyahmediaapp.data.repository
 import com.example.thmanyahmediaapp.data.SectionParser
 import com.example.thmanyahmediaapp.domain.IMediaRepository
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
-import com.example.thmanyahmediaapp.data.network.ApiResponse
+import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.network.HomeApiService
 import com.example.thmanyahmediaapp.data.network.SearchApiService
 import javax.inject.Inject
@@ -18,20 +18,20 @@ class MediaRepository @Inject constructor(
     override suspend fun getHomeSections(
         page: Int,
         limit: Int,
-    ): ApiResponse<SectionsResponse> {
+    ): ApiResult<SectionsResponse> {
         val response = homeApi.getHomeSections(page, limit)
         return response.body()?.let { body ->
             val parsedSections = body.sections.map { section ->
-                section.copy(items = SectionParser.parse(section.items, section.contentType))
+                section.copy(items = SectionParser.parse(section.items, section.sectionContentType))
             }
-            ApiResponse.Success(body.copy(sections = parsedSections))
-        } ?: ApiResponse.Error("Empty response body")
+            ApiResult.Success(body.copy(sections = parsedSections))
+        } ?: ApiResult.Error("Empty response body")
     }
 
-    override suspend fun search(query: String, page: Int, limit: Int): ApiResponse<*> {
+    override suspend fun search(query: String, page: Int, limit: Int): ApiResult<*> {
         val response = searchApi.search(query, page, limit)
         return response.body()?.let { body ->
-            ApiResponse.Success(body)
-        } ?: ApiResponse.Error("Empty response body")
+            ApiResult.Success(body)
+        } ?: ApiResult.Error("Empty response body")
     }
 }

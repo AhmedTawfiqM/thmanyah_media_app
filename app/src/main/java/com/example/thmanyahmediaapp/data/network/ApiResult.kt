@@ -4,10 +4,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import retrofit2.Response
 
-sealed class ApiResponse<out T> {
-    data class Success<T>(val result: T) : ApiResponse<T>()
-    data class Error(val message: String, val code: Int? = null) : ApiResponse<Nothing>()
-    object Loading : ApiResponse<Nothing>()
+sealed class ApiResult<out T> {
+    data class Success<T>(val result: T) : ApiResult<T>()
+    data class Error(val message: String, val code: Int? = null) : ApiResult<Nothing>()
+    object Loading : ApiResult<Nothing>()
 
 
     val isSuccess:  Boolean =  this is Success
@@ -37,22 +37,22 @@ fun <T> Response<T>.getErrorMessage(): String {
     }
 }
 
-inline fun <T> ApiResponse<T>.onSuccess(action: (T) -> Unit): ApiResponse<T> {
-    if (this is ApiResponse.Success) {
+inline fun <T> ApiResult<T>.onSuccess(action: (T) -> Unit): ApiResult<T> {
+    if (this is ApiResult.Success) {
         action(result)
     }
     return this
 }
 
-inline fun <T> ApiResponse<T>.onError(action: (String, Int?) -> Unit): ApiResponse<T> {
-    if (this is ApiResponse.Error) {
+inline fun <T> ApiResult<T>.onError(action: (String, Int?) -> Unit): ApiResult<T> {
+    if (this is ApiResult.Error) {
         action(message, code)
     }
     return this
 }
 
-inline fun <T> ApiResponse<T>.onLoading(action: () -> Unit): ApiResponse<T> {
-    if (this is ApiResponse.Loading) {
+inline fun <T> ApiResult<T>.onLoading(action: () -> Unit): ApiResult<T> {
+    if (this is ApiResult.Loading) {
         action()
     }
     return this
