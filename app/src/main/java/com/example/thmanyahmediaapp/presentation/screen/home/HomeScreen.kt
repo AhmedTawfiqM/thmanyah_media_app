@@ -56,9 +56,7 @@ class HomeScreen(
                 )
             }
 
-            else -> {
-                SectionsView(sections)
-            }
+            else -> SectionsView(sections)
         }
     }
 
@@ -78,6 +76,39 @@ class HomeScreen(
                         section = section,
                         modifier = Modifier.fillMaxWidth()
                     )
+                }
+            }
+
+            sections.apply {
+                when {
+                    loadState.append is LoadState.Loading -> {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
+                        }
+                    }
+
+                    loadState.append is LoadState.Error -> {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Error loading more items",
+                                    color = androidx.compose.ui.graphics.Color.Red
+                                )
+                            }
+                        }
+                    }
                 }
             }
 

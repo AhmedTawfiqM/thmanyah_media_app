@@ -21,7 +21,8 @@ class MediaPagingSource @Inject constructor(
             limit = PaginationConfig.PAGE_SIZE,
         )
 
-        delay(1000)
+        /** simulate Delay on UI */
+        delay(1500)
 
         return if (response.isSuccess) {
             val successResponse = response as ApiResponse.Success<SectionsResponse>
