@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadHomeSections() {
-        request {
+        launchAsync {
             Pager(
                 config = PaginationConfig.default,
                 pagingSourceFactory = { mediaPagingSource }

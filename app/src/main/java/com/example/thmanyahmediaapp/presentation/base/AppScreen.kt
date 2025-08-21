@@ -1,8 +1,10 @@
 package com.example.thmanyahmediaapp.presentation.base
 
-import androidx.compose.material3.CircularProgressIndicator
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
+import com.example.thmanyahmediaapp.ThmanyahMediaApplication
 
 abstract class AppScreen<VM : AppViewModel> {
     abstract val vm: VM
@@ -14,12 +16,19 @@ abstract class AppScreen<VM : AppViewModel> {
     @Composable
     fun ScreenContent() {
         Content()
-        ShowLoaderProgress()
+        LaunchErrorHandler()
     }
 
     @Composable
-    private fun ShowLoaderProgress() {
-        if (!vm.toggleLoading.value) return
-        CircularProgressIndicator()
+    private fun LaunchErrorHandler() {
+        LaunchedEffect(Unit) {
+            vm.errorMessageFlow.collect { msg ->
+                if (msg?.trim().isNullOrEmpty()) return@collect
+                Toast.makeText(
+                    ThmanyahMediaApplication.context, msg,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }

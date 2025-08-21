@@ -1,18 +1,20 @@
 package com.example.thmanyahmediaapp.presentation.base
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 open class AppViewModel : ViewModel() {
 
-    var toggleLoading = mutableStateOf(false)
-    var errorMessage = mutableStateOf<String?>(null)
+    private val _errorMessageFlow = MutableStateFlow<String?>(null)
+    val errorMessageFlow: StateFlow<String?> = _errorMessageFlow.asStateFlow()
 
-    fun request(
+    fun launchAsync(
         operation: suspend () -> Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -27,7 +29,7 @@ open class AppViewModel : ViewModel() {
 
     fun handleError(exception: Exception) {
         val message = exception.message
-        errorMessage.value = message
+        _errorMessageFlow.value = message
         Timber.e(exception, "Error in request: $message")
     }
 }

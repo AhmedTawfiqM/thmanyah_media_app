@@ -18,6 +18,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,8 +37,8 @@ class SearchSectionsScreen(
     @SuppressLint("StateFlowValueCalledInComposition")
     @Composable
     override fun Content() {
-        val searchResults = vm.searchFlow.value
-        val searchQuery = vm.searchQueryFlow.value
+        val searchResults by vm.searchFlow.collectAsState()
+        val searchQuery by vm.searchQueryFlow.collectAsState()
 
         Column(
             modifier = Modifier
@@ -59,8 +61,20 @@ class SearchSectionsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            when {
-                searchResults is ApiResult.Loading -> {
+            when (val result = searchResults) {
+                is ApiResult.Error -> {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(
+                            text = "Error: ${result.message}",
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                }
+
+                ApiResult.Loading -> {
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier.fillMaxSize()
@@ -69,32 +83,32 @@ class SearchSectionsScreen(
                     }
                 }
 
-                searchResults == null && searchQuery.isBlank() -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(
-                            text = "Enter a search query to find content",
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
+                is ApiResult.Success<SectionsResponse> -> {
+                    SearchResultsView(result.result)
                 }
 
-                searchResults == null && searchQuery.isNotBlank() -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(
-                            text = "No results found for \"$searchQuery\"",
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
-                }
+                null -> {
+                    if (searchQuery.isBlank()) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "Enter a search query to find content",
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                    } else
 
-                searchResults != null && searchResults is ApiResult.Success -> {
-                    SearchResultsView(searchResults.result)
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "No results found for \"$searchQuery\"",
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
                 }
             }
         }

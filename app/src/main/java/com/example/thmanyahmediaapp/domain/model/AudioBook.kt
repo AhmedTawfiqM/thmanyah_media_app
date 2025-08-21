@@ -2,7 +2,6 @@ package com.example.thmanyahmediaapp.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class AudioBook(
     @SerializedName("audiobook_id")
     val audiobookId: String,

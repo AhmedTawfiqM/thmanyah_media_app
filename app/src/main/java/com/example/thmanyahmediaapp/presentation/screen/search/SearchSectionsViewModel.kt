@@ -22,7 +22,7 @@ class SearchSectionsViewModel @Inject constructor(
     private val mediaRepository: MediaRepository,
 ) : AppViewModel() {
 
-    private val _searchFlow = MutableStateFlow<ApiResult<SectionsResponse>?>(ApiResult.Loading)
+    private val _searchFlow = MutableStateFlow<ApiResult<SectionsResponse>?>(null)
     val searchFlow: StateFlow<ApiResult<SectionsResponse>?> = _searchFlow.asStateFlow()
 
     private val _searchQueryFlow = MutableStateFlow("")
@@ -45,14 +45,15 @@ class SearchSectionsViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) {
-        if (query.trim().isEmpty()) {
-            return
-        }
         _searchQueryFlow.value = query
+
+        if (query.trim().isEmpty()) {
+            _searchFlow.value = null
+        }
     }
 
     private fun search(query: String) {
-        request {
+        launchAsync {
             _searchFlow.value = ApiResult.Loading
             val result = mediaRepository.search(query)
             _searchFlow.value = result

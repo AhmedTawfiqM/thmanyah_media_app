@@ -29,7 +29,7 @@ class MediaRepository @Inject constructor(
     }
 
     override suspend fun search(query: String): ApiResult<SectionsResponse> {
-        val response = searchApi.search(query=query)
+        val response = searchApi.search(query = query)
         return response.body()?.let { body ->
             ApiResult.Success(body)
         } ?: ApiResult.Error("Empty response body")
