@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.thmanyahmediaapp.data.network.ApiResult
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.search.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
 import com.example.thmanyahmediaapp.presentation.screen.home.section.SectionContent
 
@@ -83,7 +83,7 @@ class SearchSectionsScreen(
                     }
                 }
 
-                is ApiResult.Success<SectionsResponse> -> {
+                is ApiResult.Success<SearchSectionsResponse> -> {
                     SearchResultsView(result.result)
                 }
 
@@ -115,17 +115,17 @@ class SearchSectionsScreen(
     }
 
     @Composable
-    fun SearchResultsView(searchResults: SectionsResponse) {
+    fun SearchResultsView(searchResults: SearchSectionsResponse) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
             items(searchResults.sections) { section ->
-                SectionContent(
-                    section = section,
-                    modifier = Modifier.fillMaxWidth()
-                )
+//                SectionContent(
+//                    section = section,
+//                    modifier = Modifier.fillMaxWidth()
+//                )
             }
 
             item {

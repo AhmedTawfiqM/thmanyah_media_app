@@ -3,6 +3,7 @@ package com.example.thmanyahmediaapp.data.repository
 import com.example.thmanyahmediaapp.data.SectionParser
 import com.example.thmanyahmediaapp.domain.IMediaRepository
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.search.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.network.HomeApiService
 import com.example.thmanyahmediaapp.data.network.SearchApiService
@@ -28,7 +29,7 @@ class MediaRepository @Inject constructor(
         } ?: ApiResult.Error("Empty response body")
     }
 
-    override suspend fun search(query: String): ApiResult<SectionsResponse> {
+    override suspend fun search(query: String): ApiResult<SearchSectionsResponse> {
         val response = searchApi.search(query = query)
         return response.body()?.let { body ->
             ApiResult.Success(body)

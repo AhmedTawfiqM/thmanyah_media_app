@@ -3,7 +3,7 @@ package com.example.thmanyahmediaapp.presentation.screen.search
 import androidx.lifecycle.viewModelScope
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.repository.MediaRepository
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.search.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -22,8 +22,8 @@ class SearchSectionsViewModel @Inject constructor(
     private val mediaRepository: MediaRepository,
 ) : AppViewModel() {
 
-    private val _searchFlow = MutableStateFlow<ApiResult<SectionsResponse>?>(null)
-    val searchFlow: StateFlow<ApiResult<SectionsResponse>?> = _searchFlow.asStateFlow()
+    private val _searchFlow = MutableStateFlow<ApiResult<SearchSectionsResponse>?>(null)
+    val searchFlow: StateFlow<ApiResult<SearchSectionsResponse>?> = _searchFlow.asStateFlow()
 
     private val _searchQueryFlow = MutableStateFlow("")
     val searchQueryFlow: StateFlow<String> = _searchQueryFlow.asStateFlow()
