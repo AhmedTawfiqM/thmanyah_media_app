@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.thmanyahmediaapp.data.network.ApiResponse
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
@@ -39,45 +41,32 @@ class HomeScreen(
         val searchResults by vm.searchResults
         var searchQuery by remember { mutableStateOf("") }
         val homeSections by vm.homeSections.collectAsState()
+        val sections = vm.sectionsFlow.collectAsLazyPagingItems()
 
         Column(
             modifier = Modifier.Companion.fillMaxSize()
         ) {
-            // Search Section
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                label = { Text("Search") },
-                modifier = Modifier.Companion
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                trailingIcon = {
-                    Button(
-                        onClick = {
-                            if (searchQuery.isNotBlank()) {
-                                //vm.search(searchQuery)
-                            }
-                        }
+            when {
+                sections.itemCount == 0 && sections.loadState.refresh is LoadState.Loading -> {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        Text("Search")
+                        CircularProgressIndicator()
                     }
                 }
-            )
 
-            when (val currentState = homeSections) {
-                is ApiResponse.Success<SectionsResponse> -> {
-
-                    val sectionsData = currentState.data
+                else -> {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(24.dp)
                     ) {
                         items(
-                            items = sectionsData.sections.sortedBy { it.order },
-                            key = { section -> section.order }
-                        ) { section ->
+                            count = sections.itemCount,
+                            key = { index -> sections[index]!!.order }
+                        ) { index ->
                             SectionContent(
-                                section = section,
+                                section = sections[index]!!,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
@@ -87,23 +76,47 @@ class HomeScreen(
                         }
                     }
                 }
-
-                ApiResponse.Loading -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-
-                is ApiResponse.Error -> {
-                    Text(
-                        text = "Error: ${currentState.message}",
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
             }
+//            when (val currentState = homeSections) {
+//                is ApiResponse.Success<SectionsResponse> -> {
+//
+//                    val sectionsData = currentState.result
+//                    LazyColumn(
+//                        modifier = Modifier.fillMaxSize(),
+//                        verticalArrangement = Arrangement.spacedBy(24.dp)
+//                    ) {
+//                        items(
+//                            items = sectionsData.sections.sortedBy { it.order },
+//                            key = { section -> section.order }
+//                        ) { section ->
+//                            SectionContent(
+//                                section = section,
+//                                modifier = Modifier.fillMaxWidth()
+//                            )
+//                        }
+//
+//                        item {
+//                            Spacer(modifier = Modifier.height(16.dp))
+//                        }
+//                    }
+//                }
+//
+//                ApiResponse.Loading -> {
+//                    Box(
+//                        contentAlignment = Alignment.Center,
+//                        modifier = Modifier.fillMaxSize()
+//                    ) {
+//                        CircularProgressIndicator()
+//                    }
+//                }
+//
+//                is ApiResponse.Error -> {
+//                    Text(
+//                        text = "Error: ${currentState.message}",
+//                        modifier = Modifier.padding(16.dp)
+//                    )
+//                }
+//            }
         }
     }
 }

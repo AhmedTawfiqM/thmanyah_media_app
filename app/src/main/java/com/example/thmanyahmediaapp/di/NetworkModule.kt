@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
+//TODO: separate network module for home and search APIs
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {

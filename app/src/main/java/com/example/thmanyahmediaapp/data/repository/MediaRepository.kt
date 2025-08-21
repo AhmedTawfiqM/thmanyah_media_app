@@ -13,10 +13,13 @@ import javax.inject.Singleton
 class MediaRepository @Inject constructor(
     private val homeApi: HomeApiService,
     private val searchApi: SearchApiService
-)  : IMediaRepository {
+) : IMediaRepository {
 
-    override suspend fun getHomeSections(): ApiResponse<SectionsResponse> {
-        val response = homeApi.getHomeSections()
+    override suspend fun getHomeSections(
+        page: Int,
+        limit: Int,
+    ): ApiResponse<SectionsResponse> {
+        val response = homeApi.getHomeSections(page, limit)
         return response.body()?.let { body ->
             val parsedSections = body.sections.map { section ->
                 section.copy(items = SectionParser.parse(section.items, section.contentType))

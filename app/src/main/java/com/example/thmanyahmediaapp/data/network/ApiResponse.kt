@@ -5,10 +5,14 @@ import com.google.gson.JsonSyntaxException
 import retrofit2.Response
 
 sealed class ApiResponse<out T> {
-    data class Success<T>(val data: T) : ApiResponse<T>()
+    data class Success<T>(val result: T) : ApiResponse<T>()
     data class Error(val message: String, val code: Int? = null) : ApiResponse<Nothing>()
     object Loading : ApiResponse<Nothing>()
+
+
+    val isSuccess:  Boolean =  this is Success
 }
+
 
 data class ErrorResponse(
     val status: String? = null,
@@ -35,7 +39,7 @@ fun <T> Response<T>.getErrorMessage(): String {
 
 inline fun <T> ApiResponse<T>.onSuccess(action: (T) -> Unit): ApiResponse<T> {
     if (this is ApiResponse.Success) {
-        action(data)
+        action(result)
     }
     return this
 }
