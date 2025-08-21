@@ -2,8 +2,8 @@ package com.example.thmanyahmediaapp.data.repository
 
 import com.example.thmanyahmediaapp.data.SectionParser
 import com.example.thmanyahmediaapp.domain.IMediaRepository
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
-import com.example.thmanyahmediaapp.domain.model.search.SearchSectionsResponse
+import com.example.thmanyahmediaapp.domain.model.sections.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
 import com.example.thmanyahmediaapp.data.network.HomeApiService
 import com.example.thmanyahmediaapp.data.network.SearchApiService

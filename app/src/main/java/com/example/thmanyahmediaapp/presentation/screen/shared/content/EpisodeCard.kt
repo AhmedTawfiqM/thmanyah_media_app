@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.home.content
+package com.example.thmanyahmediaapp.presentation.screen.shared.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,18 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.AudioBook
+import com.example.thmanyahmediaapp.domain.model.sections.Episode
 
 @Composable
-fun AudioBookCard(audioBook: AudioBook) {
+ fun EpisodeCard(episode: Episode) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ) {
         AsyncImage(
-            model = audioBook.avatarUrl,
-            contentDescription = audioBook.name,
+            model = episode.avatarUrl,
+            contentDescription = episode.name,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -39,24 +39,24 @@ fun AudioBookCard(audioBook: AudioBook) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = audioBook.name,
+            text = episode.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
 
-        audioBook.authorName?.let { author ->
+        episode.podcastName?.let { podcastName ->
             Text(
-                text = "By $author",
+                text = podcastName,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
-        audioBook.duration?.let { duration ->
+        episode.duration?.let { duration ->
             Text(
-                text = "${duration / 3600}h ${(duration % 3600) / 60}m",
+                text = "${duration / 60} min",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary
             )

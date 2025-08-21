@@ -1,7 +1,7 @@
-package com.example.thmanyahmediaapp.domain.model.search
+package com.example.thmanyahmediaapp.domain.model.search_sections
 
-import com.example.thmanyahmediaapp.domain.model.SectionContentType
-import com.example.thmanyahmediaapp.domain.model.SectionLayout
+import com.example.thmanyahmediaapp.domain.model.sections.SectionContentType
+import com.example.thmanyahmediaapp.domain.model.sections.SectionLayout
 import com.google.gson.annotations.SerializedName
 
 data class SearchSectionsResponse(

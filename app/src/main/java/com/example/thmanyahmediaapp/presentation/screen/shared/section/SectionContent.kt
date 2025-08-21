@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.home.section
+package com.example.thmanyahmediaapp.presentation.screen.shared.section
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.model.Section
-import com.example.thmanyahmediaapp.domain.model.SectionLayout
+import com.example.thmanyahmediaapp.domain.model.sections.Section
+import com.example.thmanyahmediaapp.domain.model.sections.SectionLayout
 
 @Composable
 fun SectionContent(

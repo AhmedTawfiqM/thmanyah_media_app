@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.presentation.screen.home.content
+package com.example.thmanyahmediaapp.presentation.screen.shared.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,18 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.Podcast
+import com.example.thmanyahmediaapp.domain.model.sections.AudioArticle
 
 @Composable
- fun PodcastCard(podcast: Podcast) {
+fun AudioArticleCard(audioArticle: AudioArticle) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ) {
         AsyncImage(
-            model = podcast.avatarUrl,
-            contentDescription = podcast.name,
+            model = audioArticle.avatarUrl,
+            contentDescription = audioArticle.name,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -39,18 +39,26 @@ import com.example.thmanyahmediaapp.domain.model.Podcast
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = podcast.name,
+            text = audioArticle.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
-        podcast.episodeCount?.let { count ->
+        audioArticle.authorName?.let { author ->
             Text(
-                text = "$count episodes",
+                text = "By $author",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        audioArticle.duration?.let { duration ->
+            Text(
+                text = "${duration / 60} min",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

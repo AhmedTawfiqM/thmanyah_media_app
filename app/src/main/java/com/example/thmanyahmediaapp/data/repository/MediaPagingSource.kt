@@ -1,8 +1,8 @@
 package com.example.thmanyahmediaapp.data.repository
 
 import com.example.thmanyahmediaapp.data.network.ApiResult
-import com.example.thmanyahmediaapp.domain.model.Section
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.sections.Section
+import com.example.thmanyahmediaapp.domain.model.sections.SectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.paging.BasePagingSource
 import com.example.thmanyahmediaapp.presentation.base.paging.PaginationConfig
 import kotlinx.coroutines.delay

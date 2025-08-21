@@ -1,6 +1,6 @@
 package com.example.thmanyahmediaapp.data.network
 
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.sections.SectionsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -25,9 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.thmanyahmediaapp.data.network.ApiResult
-import com.example.thmanyahmediaapp.domain.model.search.SearchSectionsResponse
+import com.example.thmanyahmediaapp.domain.model.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
-import com.example.thmanyahmediaapp.presentation.screen.home.section.SectionContent
 
 class SearchSectionsScreen(
     override val vm: SearchSectionsViewModel,
