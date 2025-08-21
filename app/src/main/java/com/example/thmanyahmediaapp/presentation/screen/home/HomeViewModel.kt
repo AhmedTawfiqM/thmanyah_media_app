@@ -21,7 +21,6 @@ class HomeViewModel @Inject constructor(
     private val mediaPagingSource: MediaPagingSource,
 ) : AppViewModel() {
 
-    //TODO: map between sections and ui layer
     private val _sectionsFlow =
         MutableStateFlow<PagingData<Section>>(PagingData.Companion.empty())
     val sectionsFlow: StateFlow<PagingData<Section>> = _sectionsFlow.asStateFlow()
