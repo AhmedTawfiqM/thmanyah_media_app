@@ -18,9 +18,10 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.thmanyahmediaapp.data.model.Section
+import com.example.thmanyahmediaapp.domain.entity.sections.Section
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
-import com.example.thmanyahmediaapp.presentation.screen.shared.section.SectionContent
+import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
+import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
 class HomeScreen(
     override val vm: HomeViewModel,
@@ -66,7 +67,7 @@ class HomeScreen(
                 val section = sections[index]
                 if (section != null) {
                     SectionContent(
-                        section = section,
+                        section = section.toSectionItem(),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

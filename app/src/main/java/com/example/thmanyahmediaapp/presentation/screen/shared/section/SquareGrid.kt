@@ -10,19 +10,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.thmanyahmediaapp.domain.entity.SectionContentType
-import com.example.thmanyahmediaapp.presentation.screen.shared.ContentCard
+import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContentCard
 
 @Composable
 fun SquareGrid(
     content: List<Any>,
-    sectionContentType: SectionContentType
+    sectionContentType: SectionContentType?
 ) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(content) { item ->
-            ContentCard(
+            SectionContentCard(
                 content = item,
                 sectionContentType = sectionContentType,
                 modifier = Modifier

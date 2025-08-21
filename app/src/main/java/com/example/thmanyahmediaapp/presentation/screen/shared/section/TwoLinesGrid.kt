@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.thmanyahmediaapp.domain.entity.SectionContentType
-import com.example.thmanyahmediaapp.presentation.screen.shared.ContentCard
+import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContentCard
 
 @Composable
 fun TwoLinesGrid(
     content: List<Any>,
-    sectionContentType: SectionContentType
+    sectionContentType: SectionContentType?
 ) {
     LazyHorizontalGrid(
         rows = GridCells.Fixed(2),
@@ -26,7 +26,7 @@ fun TwoLinesGrid(
         modifier = Modifier.height(250.dp)
     ) {
         items(content) { item ->
-            ContentCard(
+            SectionContentCard(
                 content = item,
                 sectionContentType = sectionContentType,
                 modifier = Modifier.width(160.dp)

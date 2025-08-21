@@ -24,9 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.thmanyahmediaapp.data.model.SearchSectionsResponse
 import com.example.thmanyahmediaapp.data.network.ApiResult
-import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
+import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
+import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
 class SearchSectionsScreen(
     override val vm: SearchSectionsViewModel,
@@ -121,10 +123,10 @@ class SearchSectionsScreen(
         ) {
 
             items(searchResults.sections) { section ->
-//                SectionContent(
-//                    section = section,
-//                    modifier = Modifier.fillMaxWidth()
-//                )
+                SectionContent(
+                    section = section.toSectionItem(),
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
 
             item {
