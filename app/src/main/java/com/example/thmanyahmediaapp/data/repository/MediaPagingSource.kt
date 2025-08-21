@@ -23,16 +23,23 @@ class MediaPagingSource @Inject constructor(
 
         delay(1000)
 
-        val result = if (response.isSuccess) {
-            (response as ApiResponse.Success<SectionsResponse> ).result.sections
+        return if (response.isSuccess) {
+            val successResponse = response as ApiResponse.Success<SectionsResponse>
+            val sectionsResponse = successResponse.result
+            val sections = sectionsResponse.sections
+            val pagination = sectionsResponse.pagination
+
+            // Determine if there's a next page based on pagination info
+            val hasNextPage = pagination?.nextPage != null ||
+                    (pagination?.totalPages != null && page < pagination.totalPages)
+
+            LoadResult.Page(
+                data = sections,
+                prevKey = if (page == 1) null else page - 1,
+                nextKey = if (hasNextPage && sections.isNotEmpty()) page + 1 else null
+            )
         } else {
             throw Exception("API Error")
         }
-
-        return LoadResult.Page(
-            data = result,
-            prevKey = if (page == 1) null else page - 1,
-            nextKey = if (result.isEmpty()) null else page + 1
-        )
     }
 }

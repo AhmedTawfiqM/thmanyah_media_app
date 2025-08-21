@@ -38,30 +38,26 @@ class HomeScreen(
         var searchQuery by remember { mutableStateOf("") }
         val sections = vm.sectionsFlow.collectAsLazyPagingItems()
 
-        Column(
-            modifier = Modifier.Companion.fillMaxSize()
-        ) {
-            when {
-                sections.itemCount == 0 && sections.loadState.refresh is LoadState.Loading -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
-                    }
+        when {
+            sections.itemCount == 0 && sections.loadState.refresh is LoadState.Loading -> {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    CircularProgressIndicator()
                 }
+            }
 
-                sections.itemCount == 0 &&
-                        sections.loadState.refresh is LoadState.Error -> {
-                    Text(
-                        text = "Error",
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
+            sections.itemCount == 0 &&
+                    sections.loadState.refresh is LoadState.Error -> {
+                Text(
+                    text = "Error",
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
 
-                else -> {
-                   SectionsView(sections)
-                }
+            else -> {
+                SectionsView(sections)
             }
         }
     }

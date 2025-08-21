@@ -9,6 +9,6 @@ object PaginationConfig {
     val default = PagingConfig(
         pageSize = PAGE_SIZE,
         enablePlaceholders = false,
-        initialLoadSize = INITIAL_LOAD_SIZE
+        initialLoadSize = INITIAL_LOAD_SIZE,
     )
 }

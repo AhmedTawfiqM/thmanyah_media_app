@@ -8,12 +8,7 @@ import androidx.paging.PagingState
  */
 abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
 
-    open var onDataStatusChanged: ((hasData: Boolean) -> Unit)? = null
     private var onError: ((Throwable) -> Unit)? = null
-
-    fun registerOnErrorListener(onError: (Throwable) -> Unit) {
-        this.onError = onError
-    }
 
     protected abstract suspend fun loadData(params: LoadParams<Int>): LoadResult<Int, T>
 
