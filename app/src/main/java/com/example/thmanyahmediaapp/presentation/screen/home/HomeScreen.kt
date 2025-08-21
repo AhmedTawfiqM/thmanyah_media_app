@@ -9,13 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,9 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.thmanyahmediaapp.data.network.ApiResponse
-import com.example.thmanyahmediaapp.domain.model.SectionsResponse
+import com.example.thmanyahmediaapp.domain.model.Section
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
 import com.example.thmanyahmediaapp.presentation.screen.home.section.SectionContent
 
@@ -40,7 +36,6 @@ class HomeScreen(
     override fun Content() {
         val searchResults by vm.searchResults
         var searchQuery by remember { mutableStateOf("") }
-        val homeSections by vm.homeSections.collectAsState()
         val sections = vm.sectionsFlow.collectAsLazyPagingItems()
 
         Column(
@@ -56,67 +51,40 @@ class HomeScreen(
                     }
                 }
 
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(24.dp)
-                    ) {
-                        items(
-                            count = sections.itemCount,
-                            key = { index -> sections[index]!!.order }
-                        ) { index ->
-                            SectionContent(
-                                section = sections[index]!!,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
+                sections.itemCount == 0 &&
+                        sections.loadState.refresh is LoadState.Error -> {
+                    Text(
+                        text = "Error",
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
 
-                        item {
-                            Spacer(modifier = Modifier.height(16.dp))
-                        }
-                    }
+                else -> {
+                   SectionsView(sections)
                 }
             }
-//            when (val currentState = homeSections) {
-//                is ApiResponse.Success<SectionsResponse> -> {
-//
-//                    val sectionsData = currentState.result
-//                    LazyColumn(
-//                        modifier = Modifier.fillMaxSize(),
-//                        verticalArrangement = Arrangement.spacedBy(24.dp)
-//                    ) {
-//                        items(
-//                            items = sectionsData.sections.sortedBy { it.order },
-//                            key = { section -> section.order }
-//                        ) { section ->
-//                            SectionContent(
-//                                section = section,
-//                                modifier = Modifier.fillMaxWidth()
-//                            )
-//                        }
-//
-//                        item {
-//                            Spacer(modifier = Modifier.height(16.dp))
-//                        }
-//                    }
-//                }
-//
-//                ApiResponse.Loading -> {
-//                    Box(
-//                        contentAlignment = Alignment.Center,
-//                        modifier = Modifier.fillMaxSize()
-//                    ) {
-//                        CircularProgressIndicator()
-//                    }
-//                }
-//
-//                is ApiResponse.Error -> {
-//                    Text(
-//                        text = "Error: ${currentState.message}",
-//                        modifier = Modifier.padding(16.dp)
-//                    )
-//                }
-//            }
+        }
+    }
+
+    @Composable
+    fun SectionsView(sections: LazyPagingItems<Section>) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            items(
+                count = sections.itemCount,
+                key = { index -> sections[index]!!.order }
+            ) { index ->
+                SectionContent(
+                    section = sections[index]!!,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import com.example.thmanyahmediaapp.domain.model.Section
 import com.example.thmanyahmediaapp.domain.model.SectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.paging.BasePagingSource
 import com.example.thmanyahmediaapp.presentation.base.paging.PaginationConfig
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,7 +21,8 @@ class MediaPagingSource @Inject constructor(
             limit = PaginationConfig.PAGE_SIZE,
         )
 
-        // Handle the response properly
+        delay(1000)
+
         val result = if (response.isSuccess) {
             (response as ApiResponse.Success<SectionsResponse> ).result.sections
         } else {
