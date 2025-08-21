@@ -70,12 +70,15 @@ class HomeScreen(
         ) {
             items(
                 count = sections.itemCount,
-                key = { index -> sections[index]!!.order }
+                key = { index -> sections.peek(index)?.order ?: "section_$index" }
             ) { index ->
-                SectionContent(
-                    section = sections[index]!!,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                val section = sections[index]
+                if (section != null) {
+                    SectionContent(
+                        section = section,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
 
             item {
