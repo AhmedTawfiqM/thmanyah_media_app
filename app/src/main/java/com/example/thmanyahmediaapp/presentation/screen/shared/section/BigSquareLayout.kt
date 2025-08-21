@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.model.sections.SectionContentType
+import com.example.thmanyahmediaapp.domain.entity.SectionContentType
 import com.example.thmanyahmediaapp.presentation.screen.shared.ContentCard
 
 @Composable

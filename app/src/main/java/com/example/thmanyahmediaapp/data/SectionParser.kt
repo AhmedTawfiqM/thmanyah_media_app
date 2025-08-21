@@ -1,10 +1,10 @@
 package com.example.thmanyahmediaapp.data
 
-import com.example.thmanyahmediaapp.domain.model.sections.AudioArticle
-import com.example.thmanyahmediaapp.domain.model.sections.AudioBook
-import com.example.thmanyahmediaapp.domain.model.sections.SectionContentType
-import com.example.thmanyahmediaapp.domain.model.sections.Episode
-import com.example.thmanyahmediaapp.domain.model.sections.Podcast
+import com.example.thmanyahmediaapp.domain.entity.sections.AudioArticle
+import com.example.thmanyahmediaapp.domain.entity.sections.AudioBook
+import com.example.thmanyahmediaapp.domain.entity.SectionContentType
+import com.example.thmanyahmediaapp.domain.entity.sections.Episode
+import com.example.thmanyahmediaapp.domain.entity.sections.Podcast
 import com.google.gson.Gson
 
 object SectionParser {

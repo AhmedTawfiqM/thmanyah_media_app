@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.sections.AudioArticle
+import com.example.thmanyahmediaapp.domain.entity.sections.AudioArticle
 
 @Composable
 fun AudioArticleCard(audioArticle: AudioArticle) {

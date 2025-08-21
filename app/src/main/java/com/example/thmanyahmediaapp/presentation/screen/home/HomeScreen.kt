@@ -18,7 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.thmanyahmediaapp.domain.model.sections.Section
+import com.example.thmanyahmediaapp.data.model.Section
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
 import com.example.thmanyahmediaapp.presentation.screen.shared.section.SectionContent
 

@@ -1,8 +1,8 @@
-package com.example.thmanyahmediaapp.domain.model.sections
+package com.example.thmanyahmediaapp.domain.entity.search_sections
 
 import com.google.gson.annotations.SerializedName
 
-data class AudioArticle(
+data class SearchAudioArticle(
     @SerializedName("article_id")
     val articleId: String,
     @SerializedName("name")
@@ -14,9 +14,9 @@ data class AudioArticle(
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
     @SerializedName("duration")
-    val duration: Int? = null,
+    val duration: String? = null,
     @SerializedName("release_date")
     val releaseDate: String? = null,
     @SerializedName("score")
-    val score: Double? = null
+    val score: String? = null
 )

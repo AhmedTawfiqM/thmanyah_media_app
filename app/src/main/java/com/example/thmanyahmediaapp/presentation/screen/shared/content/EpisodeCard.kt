@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.thmanyahmediaapp.domain.model.sections.Episode
+import com.example.thmanyahmediaapp.domain.entity.sections.Episode
 
 @Composable
  fun EpisodeCard(episode: Episode) {

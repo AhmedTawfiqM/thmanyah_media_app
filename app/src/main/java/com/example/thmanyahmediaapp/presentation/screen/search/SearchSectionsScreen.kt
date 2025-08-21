@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.thmanyahmediaapp.data.network.ApiResult
-import com.example.thmanyahmediaapp.domain.model.search_sections.SearchSectionsResponse
+import com.example.thmanyahmediaapp.domain.entity.search_sections.SearchSectionsResponse
 import com.example.thmanyahmediaapp.presentation.base.AppScreen
 
 class SearchSectionsScreen(

@@ -1,4 +1,4 @@
-package com.example.thmanyahmediaapp.domain.model.sections
+package com.example.thmanyahmediaapp.domain.entity.sections
 
 import com.google.gson.annotations.SerializedName
 

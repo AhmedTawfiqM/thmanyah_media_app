@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.model.sections.Section
-import com.example.thmanyahmediaapp.domain.model.sections.SectionLayout
+import com.example.thmanyahmediaapp.data.model.Section
+import com.example.thmanyahmediaapp.domain.entity.SectionLayout
 
 @Composable
 fun SectionContent(

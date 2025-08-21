@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/thmanyahmediaapp/domain/model/ui/PaginationItem.kt">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/java/com/example/thmanyahmediaapp/domain/model/ui/PaginationItem.kt" />
+              <option name="updatedContent" value="package com.example.thmanyahmediaapp.domain.model.ui&#10;&#10;data class PaginationItem(&#10;    val nextPage: String? = null,&#10;    val totalPages: String? = null&#10;)" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/thmanyahmediaapp/domain/model/ui/SectionsResponseItem.kt">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/java/com/example/thmanyahmediaapp/domain/model/ui/SectionsResponseItem.kt" />
+              <option name="updatedContent" value="package com.example.thmanyahmediaapp.domain.model.ui&#10;&#10;data class SectionsResponseItem(&#10;    val sections: List&lt;SectionItem&gt;,&#10;    val pagination: PaginationItem? = null,&#10;    val status: String? = null,&#10;    val message: String? = null&#10;)" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -5,11 +5,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.thmanyahmediaapp.domain.model.sections.AudioArticle
-import com.example.thmanyahmediaapp.domain.model.sections.AudioBook
-import com.example.thmanyahmediaapp.domain.model.sections.SectionContentType
-import com.example.thmanyahmediaapp.domain.model.sections.Episode
-import com.example.thmanyahmediaapp.domain.model.sections.Podcast
+import com.example.thmanyahmediaapp.domain.entity.sections.AudioArticle
+import com.example.thmanyahmediaapp.domain.entity.sections.AudioBook
+import com.example.thmanyahmediaapp.domain.entity.SectionContentType
+import com.example.thmanyahmediaapp.domain.entity.sections.Episode
+import com.example.thmanyahmediaapp.domain.entity.sections.Podcast
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioArticleCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.AudioBookCard
 import com.example.thmanyahmediaapp.presentation.screen.shared.content.EpisodeCard

@@ -1,5 +1,6 @@
-package com.example.thmanyahmediaapp.domain.model.sections
+package com.example.thmanyahmediaapp.data.model
 
+import com.example.thmanyahmediaapp.domain.entity.sections.Section
 import com.google.gson.annotations.SerializedName
 
 data class SectionsResponse(
@@ -11,19 +12,6 @@ data class SectionsResponse(
     val status: String? = null,
     @SerializedName("message")
     val message: String? = null
-)
-
-data class Section(
-    @SerializedName("name")
-    val name: String,
-    @SerializedName("type")
-    val type: SectionLayout?,
-    @SerializedName("content_type")
-    val sectionContentType: SectionContentType,
-    @SerializedName("order")
-    val order: Int,
-    @SerializedName("content")
-    val items: List<Any>
 )
 
 data class Pagination(
