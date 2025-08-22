@@ -148,7 +148,7 @@ class HomeScreenPaginationTest {
         composeTestRule.setContent {
             ThmanyahMediaAppTheme {
                 val homeScreen = HomeScreen(
-                    vm = viewModel,
+                    vm = mockk(),
                     host = navController
                 )
                 homeScreen.ScreenContent()

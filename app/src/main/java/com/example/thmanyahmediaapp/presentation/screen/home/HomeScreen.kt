@@ -35,9 +35,9 @@ import com.example.thmanyahmediaapp.presentation.model.mappers.toSectionItem
 import com.example.thmanyahmediaapp.presentation.screen.shared.SectionContent
 
 class HomeScreen(
-    override val vm: BaseHomeViewModel,
+    override val vm: HomeViewModel,
     override val host: NavHostController,
-) : AppScreen<BaseHomeViewModel>() {
+) : AppScreen<HomeViewModel>() {
 
     @Composable
     override fun Content() {
