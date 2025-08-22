@@ -1,9 +1,13 @@
 package com.example.thmanyahmediaapp.presentation.screen.shared
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -39,18 +43,29 @@ fun SectionContent(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        Text(
-            text = section.name,
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = section.name,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "expand Icon"
+            )
+        }
 
         when (section.type) {
             SectionLayout.SQUARE -> SquareGrid(items, sectionType)
             SectionLayout.TWO_LINES_GRID -> TwoLinesGrid(items, sectionType)
             SectionLayout.BIG_SQUARE,
             SectionLayout.BIGSQUARE -> BigSquareLayout(items, sectionType)
+
             SectionLayout.QUEUE -> QueueLayout(items, sectionType)
             null -> QueueLayout(items, sectionType)
         }
@@ -75,7 +90,10 @@ fun SectionContentCard(
             SectionContentType.PODCAST -> PodcastCard(content as? PodcastItem ?: return@Card)
             SectionContentType.EPISODE -> EpisodeCard(content as? EpisodeItem ?: return@Card)
             SectionContentType.AUDIO_BOOK -> AudioBookCard(content as? AudioBookItem ?: return@Card)
-            SectionContentType.AUDIO_ARTICLE -> AudioArticleCard(content as? AudioArticleItem ?: return@Card)
+            SectionContentType.AUDIO_ARTICLE -> AudioArticleCard(
+                content as? AudioArticleItem ?: return@Card
+            )
+
             null -> MediaCard(content as? MediaItem ?: return@Card)
         }
     }
